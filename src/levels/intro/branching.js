@@ -2,6 +2,7 @@ exports.level = {
   "goalTreeString": "{\"branches\":{\"master\":{\"target\":\"C1\",\"id\":\"master\"},\"bugFix\":{\"target\":\"C1\",\"id\":\"bugFix\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"bugFix\",\"id\":\"HEAD\"}}",
   "solutionCommand": "git branch bugFix;git checkout bugFix",
   "name": {
+    "cs_CZ": "Větvení v Git"
     "en_US": "Branching in Git",
     "de_DE": "Branches in Git",
     "ja"   : "Gitのブランチ",
@@ -14,6 +15,7 @@ exports.level = {
     "ru_RU": "Ветвление в Git"
   },
   "hint": {
+    "cs_CZ": "Vytvořte novou větev pomocí \"git branch [jméno]\" a zkontrolujte si to s \"git checkout [jméno]\"",
     "en_US": "Make a new branch with \"git branch [name]\" and check it out with \"git checkout [name]\"",
     "de_DE": 'Lege mit "git branch <Name>" einen neuen Branch an und checke ihn mit "git checkout <Name> aus',
     "ja"   : "ブランチの作成（\"git branch [ブランチ名]\"）と、チェックアウト（\"git checkout [ブランチ名]\"）",
@@ -29,6 +31,84 @@ exports.level = {
     "git revert": true
   },
   "startDialog": {
+    "cs_CZ": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git větve",
+              "",
+              "Větve v Git-u jsou také neuvěřitelnně odlehčené. Jsou jednoduše ukazateli na specifický commit -- nic více. Toto je proč mnoho nadšenců Git-u opěvují mantru:",
+              "",
+              "```",
+              "větvi brzy a větvi často",
+              "```",
+              "",
+              "Protože tu není žádná paměťová režie při vytváření mnoha větví, je to jednodušší logicky dělit Vaši práci, než mít velké masité větve.",
+              "",
+              "Když začneme mísit větvení a commit-y, uvidíme jak se tyto funkce kombinují. Pro teď nicméně, pouze si pamatujte, že větev v podstatě říká \"Chci zahrnout práci tohoto commit-u a všech rodičovských commit-ů.\""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Podívejme se, jak větve vypadají v praxi.",
+              "",
+              "Zde vytvoříme novou větev pojmenovanou `newImage`"
+            ],
+            "afterMarkdowns": [
+              "Toto je vše, co se týká větvení! Větev `newImage` nyní odkazuje na commit `C1`"
+            ],
+            "command": "git branch newImage",
+            "beforeCommand": ""
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Pokusme se vložit nějakou práci na tuto novou větev. Stiskněte tlačítko níže "
+            ],
+            "afterMarkdowns": [
+              "Ó ne! Větev `master` se posunula, ale větev `newImage` nikoli! Toto je protože jsme nebyli\ "na\" nové větvi, což je důvod, proč byla hvězdička (*) na `master`"
+            ],
+            "command": "git commit",
+            "beforeCommand": "git branch newImage"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Povězme git-u, že chceme checkout větev s",
+              "",
+              "```",
+              "git checkout [jméno]",
+              "```",
+              "",
+              "Toto nás umístí na novou větev, před commit-nutím načich změn"
+            ],
+            "afterMarkdowns": [
+              "A jsme tam! Naše změny byly zaznamenány na novou větev"
+            ],
+            "command": "git checkout newImage; git commit",
+            "beforeCommand": "git branch newImage"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Ok! Nyní jste všichni připravení na větvení. Jakmile se toto okno zavře,",
+              "vytvořte novou větev pojmenovanou `bugFix` a přepněte se do této větve"
+            ]
+          }
+        }
+      ]
+    },
     "en_US": {
       "childViews": [
         {
