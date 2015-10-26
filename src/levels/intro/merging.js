@@ -2,6 +2,7 @@ exports.level = {
   "goalTreeString": "{\"branches\":{\"master\":{\"target\":\"C4\",\"id\":\"master\"},\"bugFix\":{\"target\":\"C2\",\"id\":\"bugFix\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C1\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C3\",\"C2\"],\"id\":\"C4\"}},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"}}",
   "solutionCommand": "git checkout -b bugFix;git commit;git checkout master;git commit;git merge bugFix",
   "name": {
+    "cs_CZ": "Spojování v Git",
     "en_US": "Merging in Git",
     "de_DE": "Mergen in git",
     "es_AR": "Mergeando en Git",
@@ -14,6 +15,7 @@ exports.level = {
     "ru_RU": "Слияния веток в Git"
   },
   "hint": {
+    "cs_CZ": "Pamatujte si commit-nout ve specifikovaném pořadí (bugFix před master)",
     "en_US": "Remember to commit in the order specified (bugFix before master)",
     "de_DE": "Denk dran in der angegebenen Reihenfolge zu committen (erst bugFix, dann master)",
     "ja"　　　: "指示された順番でコミットすること（masterの前にbugFixで）",
@@ -29,6 +31,75 @@ exports.level = {
     "git revert": true
   },
   "startDialog": {
+    "cs_CZ": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Větve a Slučování",
+              "",
+              "Skvěle! Nyní víme jak na commit a větvení. Nyní se potřebujeme naučit nějaký způsob pro zkombinování práce ze dvou různých větví dohromady. To nám umožní vytvořit postranní větev, vyvinout novou funkci, a poté ji zkombinovat zpátky.",
+              "",
+              "První metoda pro zkombinování práce, kterou prozkoumáme, je `git merge`. Slučování v Git-u vytváří speciální commit, který má dva unikátní rodiče. Commit se dvěmi rodiči v podstatě znamená \"Chci vložit všechnu práci z tohoto a zároveň z tamtoho rodiče, *a* také množiny všech jejich rodičů.\"",
+              "",
+              "Je to jednodušší s vizualizací, koukněte se na to v dalším pohledu"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Zde máme dvě větve; každá má jeden commit, který je unikátní. To znamená, že žádná větev neobsahuje kompletní množinu \"práce\" v repozitáři, kterou jsme udělali. Spravme to pomocí sloučení.",
+              "",
+              "Sloučíme (`merge`) větev `bugFix` do větve `master`"
+            ],
+            "afterMarkdowns": [
+              "Páni! Vidíte to? Prvně `master` nyní ukazuje na commit, který má dva rodiče. Pokud budete sledovat šipky nahoru ve stromě commit-ů z `master`, narazíte na každý commit podél cesty ke kořeni. To znamená, že `master` nyní obsahuje všechnu práci v repozitáři.",
+              "",
+              "Vidíte také, jak se barvy commit-ů změnily? Pro pomoc při učení, jsem vložil nějakou koordinaci barev. Každá větev má unikátní barvu. Každý commit se změní na barvu, která je smíchaná kombinace všech větví obsahující tento commit.",
+              "",
+              "Zde vidíme, že barva větve `master` je smíchaná ze všech commit-ů, ale barva `bugFix` nikoli. Opravme to..."
+            ],
+            "command": "git merge bugFix",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Slučme `master` do `bugFix`:"
+            ],
+            "afterMarkdowns": [
+              "Jelikož `bugFix` byl předek `master`, git nemusel udělat žádnou práci; prostě jednoduše přemístil `bugFix` do stejného commit-u, ke kterému byl `master` připojen",
+              "",
+              "Nyní jsou všechny commit-y stejné barvy, což znamená, že každá větev obsahuje všechnu práci v repozitáři! Hurááá!"
+            ],
+            "command": "git checkout bugFix; git merge master",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit; git merge bugFix"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Pro dokončení této úrovně, udělejte následující kroky:",
+              "",
+              "* Vytvořte novou větev nazvanou `bugFix`",
+              "* Checkout větev `bugFix` použitím `git checkout bugFix`",
+              "* Jednou commit-něte",
+              "* Běžte zpět do `master` použitím `git checkout`",
+              "* Commit-něte znova",
+              "* Slučte větev `bugFix` do `master` použitím `git merge`",
+              "",
+              "*Pamatujte si, že si vždy můžete znovu zobrazit tento dialog použitím \"cíl\"!*"
+            ]
+          }
+        }
+      ]
+    },
     "en_US": {
       "childViews": [
         {
