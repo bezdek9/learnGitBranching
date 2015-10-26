@@ -1,5 +1,6 @@
 exports.level = {
   "name": {
+    "cs_CZ": "Úvod do Git commitů",
     "en_US": "Introduction to Git Commits",
     "de_DE": "Einführung in Git Commits",
     "es_AR": "Introducción a los commits de Git",
@@ -15,6 +16,7 @@ exports.level = {
   "solutionCommand": "git commit;git commit",
   "startTree": "{\"branches\":{\"master\":{\"target\":\"C1\",\"id\":\"master\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"}}",
   "hint": {
+    "cs_CZ": "Pro dokončení prostě napiš dvakrát 'git commit'!",
     "en_US": "Just type in 'git commit' twice to finish!",
     "de_DE": "Gib einfach zweimal 'git commit' ein um den Level abzuschließen",
     "es_AR": "¡Simplemente tipeá 'git commit' dos veces para terminar!",
@@ -30,6 +32,48 @@ exports.level = {
     "git revert": true
   },
   "startDialog": {
+    "cs_CZ": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Commity",
+              "Příkaz 'commit' v git repozitáři zaznamenává snímek všech souborů ve Vašem adresáři. Je to jako obrovské kopírování a vkládání, ale dokonce lepší!",
+              "",
+              "Přesto chce git udržet commit-y tak odlehčené, jak je jen možné, proto pouze slepě nekopíruje celý adresář pokaždé, když použiješ commit. Může (je-li to možné) zkomprimovat commit jako množinu změn (nebo-li tzv. \"delta\"), z jedné verze repozitáře do verze další.",
+              "",
+              "Git také udržuje historii toho, kdy byly provedeny jaké commit-y. To je důvod, proč většina commit-ů má nad sebou rodičovský commit -- v naší vizualizaci tento vztah znázoňujeme pomocí šipek. Udržování historie je skvělé pro každého, kdo pracuje na projektu!",
+              "",
+              "Je toho hodně k pochopení, ale pro teď můžete přemýšlet o commit-ech jako o snímcích projektu. Commit-y jsou velmi odlehčené a přepínání mezi nimy je zatraceně rychlé!"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Podívejme se na to, jak to vypadá v praxi. Napravo máme vizualizaci (malého) git repozitáře. Právě teď tam jsou dva commit-y -- první počáteční commit `C0` a jeden commit hned pod ním `C1` který může mít nějaké smysluplné změny.",
+              "",
+              "Stiskněte tlačítko níže pro vytvoření nového commit-u"
+            ],
+            "afterMarkdowns": [
+              "A je to tam! Úžasné. Právě jsme vytvořili změny v repozitáři a uložili je jako commit-y. Commit, který jsme právě vytvořili, má rodiče `C1`, který odkazuje na commit, z kterého byl odvozen."
+            ],
+            "command": "git commit",
+            "beforeCommand": ""
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Pokračujte a vyzkoušjte si to na vlatní pěst! Až se toto okno zavře, vytvořte dva commit-y pro dokončení úrovně"
+            ]
+          }
+        }
+      ]
+    },
     "en_US": {
       "childViews": [
         {
